@@ -6,6 +6,60 @@ for(my $i=1;$i<=9;$i++){
 $player_one = 0;
 $player_two = 0;
 $playing=1;
+sub win
+{
+	$flag=$_[0];
+	$player=$_[1];
+
+	if($flag==1)
+	{
+		$symbol="X";
+	}
+	elsif($flag==2)
+	{
+		$symbol="O";
+	}	
+	if($board{1} eq $symbol && $board{2} eq $symbol && $board{3} eq $symbol)
+	{
+		print "The winner of the game we call tic tac toe is $player";
+		exit;
+	}
+	elsif($board{4} eq $symbol && $board{5} eq $symbol && $board{6} eq $symbol)
+	{
+		print "The winner of the game we call tic tac toe is $player";
+		exit;
+	}
+	elsif($board{7} eq $symbol && $board{8} eq $symbol && $board{9} eq $symbol)
+	{
+		print "The winner of the game we call tic tac toe is $player";
+		exit;
+	}
+	elsif($board{1} eq $symbol && $board{4} eq $symbol && $board{7} eq $symbol)
+	{
+		print "The winner of the game we call tic tac toe is $player";
+		exit;
+	}
+	elsif($board{2} eq $symbol && $board{5} eq $symbol && $board{8} eq $symbol)
+	{
+		print "The winner of the game we call tic tac toe is $player";
+		exit;
+	}
+	elsif($board{3} eq $symbol && $board{6} eq $symbol && $board{9} eq $symbol)
+	{
+		print "The winner of the game we call tic tac toe is $player";
+		exit;
+	}
+	elsif($board{1} eq $symbol && $board{5} eq $symbol && $board{9} eq $symbol)
+	{
+		print "The winner of the game we call tic tac toe is $player";
+		exit;
+	}
+	elsif($board{3} eq $symbol && $board{5} eq $symbol && $board{7} eq $symbol)
+	{
+		print "The winner of the game we call tic tac toe is $player";
+		exit;
+	}
+}
 sub greeting
 {
         print "\nWelcome to Tic Tac Toe by the SF Ganstas...\n\n";
