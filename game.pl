@@ -8,7 +8,7 @@ $player_two = 0;
 $playing=1;
 sub greeting
 {
-        print "\nWelcome to Tic Tac Toe by Nick O'Keefe and Russell Molimock\n\n";
+        print "\nWelcome to Tic Tac Toe by the SF Ganstas...\n\n";
         print "Enter Player One's Name (X): ";
         $ARGV[0] = <STDIN>;
         print "\nEnter Player Two's Name (O): ";
@@ -22,7 +22,7 @@ sub game
 	$player_one = $ARGV[0];
 	$player_two = $ARGV[1];
 	$board = $ARGV[2];
-	while(@_[0])
+	while($_[0])
 	{
 		print $player_one;
 		print "\nIt's your turn! What square do you choose?";
@@ -52,22 +52,22 @@ sub update_board
 	$choice = int($_[0]);
 	$flag = $_[1];
 	$board = $_[2];
-	if($board{$choice}==9999999999)
+	if($board{$choice}!=$choice)
 	{
-		return(0);
-	}
+                return(0);
+        }
 	else
-	{
-		if($flag==1)
-		{
-			$board{$choice} = 'X';
-		}
-		if($flag==2)
-		{
-			$board{$choice} = 'O';
-		}
-		return(1);
-	}
+        {
+                if($flag==1)
+                {
+                        $board{$choice} = 10;
+                }
+                if($flag==2)
+                {
+                        $board{$choice} = 11;
+                }
+                return(1);
+        }
 }
 sub display
 {
@@ -78,7 +78,17 @@ sub display
 		{
 			print "|";
 		}
-		print " $board{$i} |";
+		if($board{$i}<=9)
+		{
+			print " $board{$i} |";
+		}
+		if ($board{$i}==10)
+		{
+			print " X |";
+		}
+		if ($board{$i}==11)
+		{
+                        print " Y |";                                                                                                                                                  }
 		if($i==3||$i==6||$i==9)
 		{
 			print "\n-------------\n";
