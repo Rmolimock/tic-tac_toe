@@ -4,6 +4,35 @@ for(my $i=1;$i<=9;$i++){
   $board{$i}=$i;
 }
 $playing=1;
+
+sub game
+{
+	while(@_[0])
+	{
+		print $player_one;
+		print "\nIt's your turn! What square do you choose?";
+		$p1_choice = <STDIN>;
+	        while(update_board($p1_choice)==0)                                                                                                                                               {
+        	        print "Bad selection.\n";
+			print $player_one;
+        	        print "\nIt's your turn! What square do you choose?";
+	                $p1_choice = <STDIN>;
+	        }
+		print $player_two;
+                print "\nIt's your turn! What square do you choose?";
+                $p2_choice = <STDIN>;
+                while(update_board($p2_choice)==0)                                                                                                                                               {
+                        print "Bad selection.\n";
+                        print $player_two;
+                        print "\nIt's your turn! What square do you choose?";
+                        $p2_choice = <STDIN>;
+                }
+	}
+}
+sub update
+{
+	
+}
 sub greeting
 {
 	print "\nWelcome to Tic Tac Toe by Nick O'Keefe and Russell Molimock\n\n";
@@ -13,10 +42,7 @@ sub greeting
 	my $player_two = <STDIN>;
 	print "---------------\n\n";
 	display();
-	print "To select a square, enter the corresponding number.";
-	print "$player_one: ";
-	$p1_choice = <STDIN>;
-	print $p1_choice "\n";
+	print "To select a square, enter the corresponding number.\n";
 }
 sub display
 {
@@ -39,3 +65,4 @@ greeting();
 for(my $i=0;$i<=9;$i++){
   $board{$i}=' ';
 }
+game($playing);
