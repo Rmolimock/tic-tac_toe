@@ -34,6 +34,7 @@ sub game
         	        print "It's your turn! What square do you choose?";
 	                $p1_choice = <STDIN>;
 	        }
+		display();
 		print $player_two;
                 print "\nIt's your turn! What square do you choose?";
                 $p2_choice = <STDIN>;
@@ -51,8 +52,6 @@ sub update_board
 	$choice = int($_[0]);
 	$flag = $_[1];
 	$board = $_[2];
-	print $board{$choice};
-	print $choice;
 	if($board{$choice}==9999999999)
 	{
 		return(0);
