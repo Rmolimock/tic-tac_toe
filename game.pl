@@ -5,7 +5,7 @@ for(my $i=1;$i<=9;$i++){
 }
 $player_one = 0;
 $player_two = 0;
-$playing=1;
+$turns=0;
 sub win
 {
 	$flag=$_[0];
@@ -76,7 +76,8 @@ sub game
 	$player_one = $ARGV[0];
 	$player_two = $ARGV[1];
 	$board = $ARGV[2];
-	while($_[0])
+	$turns = $_[0];
+	while(1)
 	{
 		print $player_one;
 		print "\nIt's your turn! What square do you choose?";
@@ -90,6 +91,12 @@ sub game
 	        }
 		display();
 		win(1, $player_one);
+		$turns +=  1;
+		if($turns == 9)
+		{
+			print "Good job you tied\n";
+			last;
+		}
 		print $player_two;
                 print "\nIt's your turn! What square do you choose?";
                 $p2_choice = <STDIN>;
@@ -101,6 +108,7 @@ sub game
                 }
 		display();
 		win(2, $player_two);
+		$turns +=  1;
 	}
 }
 sub update_board
@@ -153,4 +161,4 @@ sub display
 print "\n\n";
 }
 greeting($player_one, $player_two);
-game($playing, $player_one, $player_two, $board);
+game($turns, $player_one, $player_two, $board);
