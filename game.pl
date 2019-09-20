@@ -13,11 +13,11 @@ sub win
 
 	if($flag==1)
 	{
-		$symbol="X";
+		$symbol=10;
 	}
 	elsif($flag==2)
 	{
-		$symbol="O";
+		$symbol=11;
 	}	
 	if($board{1} eq $symbol && $board{2} eq $symbol && $board{3} eq $symbol)
 	{
@@ -62,7 +62,7 @@ sub win
 }
 sub greeting
 {
-        print "\nWelcome to Tic Tac Toe by the SF Ganstas...\n\n";
+        print "\nWelcome to Tic Tac Toe\n\n";
         print "Enter Player One's Name (X): ";
         $ARGV[0] = <STDIN>;
         print "\nEnter Player Two's Name (O): ";
@@ -89,6 +89,7 @@ sub game
 	                $p1_choice = <STDIN>;
 	        }
 		display();
+		win(1, $player_one);
 		print $player_two;
                 print "\nIt's your turn! What square do you choose?";
                 $p2_choice = <STDIN>;
@@ -99,6 +100,7 @@ sub game
                         $p2_choice = <STDIN>;
                 }
 		display();
+		win(2, $player_two);
 	}
 }
 sub update_board
@@ -142,7 +144,7 @@ sub display
 		}
 		if ($board{$i}==11)
 		{
-                        print " Y |";                                                                                                                                                  }
+                        print " O |";                                                                                                                                                  }
 		if($i==3||$i==6||$i==9)
 		{
 			print "\n-------------\n";
