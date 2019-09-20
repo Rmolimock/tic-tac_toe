@@ -27,10 +27,11 @@ sub game
 		print $player_one;
 		print "\nIt's your turn! What square do you choose?";
 		$p1_choice = <STDIN>;
-	        while(update_board($p1_choice, 1, $board)==0)                                                                                                                                               {
-        	        print "Bad selection.\n";
+		while(update_board($p1_choice, 1, $board)==0)
+		{
+        	        print "Bad selection.\n\n";
 			print $player_one;
-        	        print "\nIt's your turn! What square do you choose?";
+        	        print "It's your turn! What square do you choose?";
 	                $p1_choice = <STDIN>;
 	        }
 		print $player_two;
@@ -42,19 +43,31 @@ sub game
                         print "\nIt's your turn! What square do you choose?";
                         $p2_choice = <STDIN>;
                 }
+		display();
 	}
 }
 sub update_board
 {
-	$choice = $ARGV[3];
-	$flag = $ARGV[1];
-	$board = $ARGV[2];
-	print "11111: $choice";
-	print "flaaggg $flag";
-	print "board $board";
-	if($board{$choice}!=$choice)
+	$choice = int($_[0]);
+	$flag = $_[1];
+	$board = $_[2];
+	print $board{$choice};
+	print $choice;
+	if($board{$choice}==9999999999)
 	{
 		return(0);
+	}
+	else
+	{
+		if($flag==1)
+		{
+			$board{$choice} = 'X';
+		}
+		if($flag==2)
+		{
+			$board{$choice} = 'O';
+		}
+		return(1);
 	}
 }
 sub display
