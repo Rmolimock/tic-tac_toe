@@ -80,7 +80,7 @@ sub game
 	while(1)
 	{
 		print $player_one;
-		print "\nIt's your turn! What square do you choose?";
+		print "\nIt's your turn! What square do you choose? ";
 		$p1_choice = <STDIN>;
 		while(update_board($p1_choice, 1, $board)==0)
 		{
@@ -94,7 +94,7 @@ sub game
 		$turns +=  1;
 		if($turns == 9)
 		{
-			print "Good job you tied\n";
+			print "Good job! You tied.\n\n";
 			last;
 		}
 		print $player_two;
