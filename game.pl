@@ -3,16 +3,31 @@ my %board;
 for(my $i=1;$i<=9;$i++){
   $board{$i}=$i;
 }
+$player_one = 0;
+$player_two = 0;
 $playing=1;
-
+sub greeting
+{
+        print "\nWelcome to Tic Tac Toe by Nick O'Keefe and Russell Molimock\n\n";
+        print "Enter Player One's Name (X): ";
+        $ARGV[0] = <STDIN>;
+        print "\nEnter Player Two's Name (O): ";
+        $ARGV[1] = <STDIN>;
+        print "---------------\n\n";
+        display();
+        print "To select a square, enter the corresponding number.\n";
+}
 sub game
 {
+	$player_one = $ARGV[0];
+	$player_two = $ARGV[1];
+	$board = $ARGV[2];
 	while(@_[0])
 	{
 		print $player_one;
 		print "\nIt's your turn! What square do you choose?";
 		$p1_choice = <STDIN>;
-	        while(update_board($p1_choice)==0)                                                                                                                                               {
+	        while(update_board($p1_choice, 1, $board)==0)                                                                                                                                               {
         	        print "Bad selection.\n";
 			print $player_one;
         	        print "\nIt's your turn! What square do you choose?";
@@ -21,7 +36,7 @@ sub game
 		print $player_two;
                 print "\nIt's your turn! What square do you choose?";
                 $p2_choice = <STDIN>;
-                while(update_board($p2_choice)==0)                                                                                                                                               {
+                while(update_board($p2_choice, 2, $board)==0)                                                                                                                                               {
                         print "Bad selection.\n";
                         print $player_two;
                         print "\nIt's your turn! What square do you choose?";
@@ -29,20 +44,18 @@ sub game
                 }
 	}
 }
-sub update
+sub update_board
 {
-	
-}
-sub greeting
-{
-	print "\nWelcome to Tic Tac Toe by Nick O'Keefe and Russell Molimock\n\n";
-	print "Enter Player One's Name (X): ";
-	my $player_one = <STDIN>;
-	print "\nEnter Player Two's Name (O): ";
-	my $player_two = <STDIN>;
-	print "---------------\n\n";
-	display();
-	print "To select a square, enter the corresponding number.\n";
+	$choice = $ARGV[3];
+	$flag = $ARGV[1];
+	$board = $ARGV[2];
+	print "11111: $choice";
+	print "flaaggg $flag";
+	print "board $board";
+	if($board{$choice}!=$choice)
+	{
+		return(0);
+	}
 }
 sub display
 {
@@ -61,8 +74,5 @@ sub display
 	}
 print "\n\n";
 }
-greeting();
-for(my $i=0;$i<=9;$i++){
-  $board{$i}=' ';
-}
-game($playing);
+greeting($player_one, $player_two);
+game($playing, $player_one, $player_two, $board);
