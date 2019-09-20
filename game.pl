@@ -100,7 +100,8 @@ sub game
 		print $player_two;
                 print "\nIt's your turn! What square do you choose?";
                 $p2_choice = <STDIN>;
-                while(update_board($p2_choice, 2, $board)==0)                                                                                                                                               {
+                while(update_board($p2_choice, 2, $board)==0)
+		{
                         print "Bad selection.\n";
                         print $player_two;
                         print "\nIt's your turn! What square do you choose?";
@@ -152,7 +153,7 @@ sub display
 		}
 		if ($board{$i}==11)
 		{
-                        print " O |";                                                                                                                                                  }
+                        print " O |";                                                                  }
 		if($i==3||$i==6||$i==9)
 		{
 			print "\n-------------\n";
