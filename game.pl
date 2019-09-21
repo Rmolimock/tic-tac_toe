@@ -22,42 +22,46 @@ sub win
 	if($board{1} eq $symbol && $board{2} eq $symbol && $board{3} eq $symbol)
 	{
 		print "The winner of the game we call tic tac toe is $player";
-		exit;
+		return(1);
 	}
 	elsif($board{4} eq $symbol && $board{5} eq $symbol && $board{6} eq $symbol)
 	{
 		print "The winner of the game we call tic tac toe is $player";
-		exit;
+		return(1);
 	}
 	elsif($board{7} eq $symbol && $board{8} eq $symbol && $board{9} eq $symbol)
 	{
 		print "The winner of the game we call tic tac toe is $player";
-		exit;
+		return(1);
 	}
 	elsif($board{1} eq $symbol && $board{4} eq $symbol && $board{7} eq $symbol)
 	{
 		print "The winner of the game we call tic tac toe is $player";
-		exit;
+		return(1);
 	}
 	elsif($board{2} eq $symbol && $board{5} eq $symbol && $board{8} eq $symbol)
 	{
 		print "The winner of the game we call tic tac toe is $player";
-		exit;
+		return(1);
 	}
 	elsif($board{3} eq $symbol && $board{6} eq $symbol && $board{9} eq $symbol)
 	{
 		print "The winner of the game we call tic tac toe is $player";
-		exit;
+		return(1);
 	}
 	elsif($board{1} eq $symbol && $board{5} eq $symbol && $board{9} eq $symbol)
 	{
 		print "The winner of the game we call tic tac toe is $player";
-		exit;
+		return(1);
 	}
 	elsif($board{3} eq $symbol && $board{5} eq $symbol && $board{7} eq $symbol)
 	{
 		print "The winner of the game we call tic tac toe is $player";
-		exit;
+		return(1);
+	}
+	else
+	{
+		return(0);
 	}
 }
 sub greeting
@@ -73,45 +77,73 @@ sub greeting
 }
 sub game
 {
-	$player_one = $ARGV[0];
-	$player_two = $ARGV[1];
-	$board = $ARGV[2];
-	$turns = $_[0];
+	$player_one=$ARGV[0];
+	$player_two=$ARGV[1];
+	$board=$ARGV[2];
+	$turns=$_[0];
+	$again='y';
 	while(1)
 	{
-		print "(X) $player_one";
-		print "\nIt's your turn! What square do you choose? ";
-		$p1_choice = <STDIN>;
-		while(update_board($p1_choice, 1, $board)==0)
+		while(1)
 		{
+			print "(X) $player_one";
+			print "\nIt's your turn! What square do you choose? ";
+			$p1_choice = <STDIN>;
+			while(update_board($p1_choice, 1, $board)==0)
+			{
+				display();
+				print "Bad selection.\n\n";
+				print $player_one;
+				print "It's your turn! What square do you choose? ";
+				$p1_choice = <STDIN>;
+			}
 			display();
-        	        print "Bad selection.\n\n";
-			print $player_one;
-        	        print "It's your turn! What square do you choose? ";
-	                $p1_choice = <STDIN>;
-	        }
-		display();
-		win(1, $player_one);
-		$turns +=  1;
-		if($turns == 9)
-		{
+			if(win(1, $player_one)==1)
+			{
+				last;
+			}
+			$turns +=  1;
+			if($turns == 9)
+			{
+				display();
+				print "Good job! You tied.\n\n";
+				last;
+			}
+			print "(O) $player_two";
+			print "\nIt's your turn! What square do you choose? ";
+			$p2_choice = <STDIN>;
+			while(update_board($p2_choice, 2, $board)==0)
+			{
+				print "Bad selection.\n";
+				print $player_two;
+				print "\nIt's your turn! What square do you choose? ";
+				$p2_choice = <STDIN>;
+			}
 			display();
-			print "Good job! You tied.\n\n";
-			last;
+			if(win(2, $player_two)==1)
+			{
+				last;
+			}
+			$turns +=  1;
 		}
-		print "(O) $player_two";
-                print "\nIt's your turn! What square do you choose? ";
-                $p2_choice = <STDIN>;
-                while(update_board($p2_choice, 2, $board)==0)
+		print "\n################################\n\nWould you like to play again y/n\n";
+		$again=<STDIN>;
+		while($again !~ /\b(y|n)\b/)
 		{
-                        print "Bad selection.\n";
-                        print $player_two;
-                        print "\nIt's your turn! What square do you choose? ";
-                        $p2_choice = <STDIN>;
-                }
-		display();
-		win(2, $player_two);
-		$turns +=  1;
+			print "Please enter y/n\n";
+			if($again eq 'y')
+			{
+				for(my $i=1;$i<=9;$i++){
+					$board{$i}=$i;
+				display();
+				}
+			}
+			else
+			{
+				print "Not everyone has good taste\n";
+				exit;
+			}
+		}
 	}
 }
 sub update_board
