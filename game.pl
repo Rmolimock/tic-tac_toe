@@ -79,14 +79,15 @@ sub game
 	$turns = $_[0];
 	while(1)
 	{
-		print $player_one;
+		print "(X) $player_one";
 		print "\nIt's your turn! What square do you choose? ";
 		$p1_choice = <STDIN>;
 		while(update_board($p1_choice, 1, $board)==0)
 		{
+			display();
         	        print "Bad selection.\n\n";
 			print $player_one;
-        	        print "It's your turn! What square do you choose?";
+        	        print "It's your turn! What square do you choose? ";
 	                $p1_choice = <STDIN>;
 	        }
 		display();
@@ -94,17 +95,18 @@ sub game
 		$turns +=  1;
 		if($turns == 9)
 		{
+			display();
 			print "Good job! You tied.\n\n";
 			last;
 		}
-		print $player_two;
-                print "\nIt's your turn! What square do you choose?";
+		print "(O) $player_two";
+                print "\nIt's your turn! What square do you choose? ";
                 $p2_choice = <STDIN>;
                 while(update_board($p2_choice, 2, $board)==0)
 		{
                         print "Bad selection.\n";
                         print $player_two;
-                        print "\nIt's your turn! What square do you choose?";
+                        print "\nIt's your turn! What square do you choose? ";
                         $p2_choice = <STDIN>;
                 }
 		display();
@@ -114,25 +116,28 @@ sub game
 }
 sub update_board
 {
-	$choice = int($_[0]);
 	$flag = $_[1];
 	$board = $_[2];
-	if($board{$choice}!=$choice)
-	{
-                return(0);
-        }
-	else
-        {
-                if($flag==1)
-                {
-                        $board{$choice} = 10;
-                }
-                if($flag==2)
-                {
-                        $board{$choice} = 11;
-                }
-                return(1);
-        }
+	if ($_[0] =~ /\b([1-9])\b/)
+	{ 
+		$choice = int($_[0]);
+		if($board{$choice}!=$choice)
+		{
+			return(0);
+		}
+		else
+		{
+			if($flag==1)
+			{
+				$board{$choice} = 10;
+			}
+			if($flag==2)
+			{
+				$board{$choice} = 11;
+			}
+			return(1);
+		}
+	}
 }
 sub display
 {
