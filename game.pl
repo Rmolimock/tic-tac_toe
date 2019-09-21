@@ -81,7 +81,7 @@ sub game
 	$player_two=$ARGV[1];
 	$board=$ARGV[2];
 	$turns=$_[0];
-	$again='y';
+	$again=0;
 	while(1)
 	{
 		while(1)
@@ -126,23 +126,28 @@ sub game
 			}
 			$turns +=  1;
 		}
-		print "\n################################\n\nWould you like to play again y/n\n";
-		$again=<STDIN>;
-		while($again !~ /\b(y|n)\b/)
+		print "\n################################\n\nWould you like to play again (1 if yes)/(0 if no)\n";
+		while($again==0)
 		{
-			print "Please enter y/n\n";
-			if($again eq 'y')
+			$again=<STDIN>;
+			if ($again =~ /\b(0|1)\b/)
 			{
-				for(my $i=1;$i<=9;$i++){
-					$board{$i}=$i;
-				display();
+				$again = int($again);
+				if($again == 1)
+				{
+					for(my $i=1;$i<=9;$i++){
+						$board{$i}=$i;
+					}
+					display();
+					last;
+				}
+				elsif($again == 0)
+				{
+					print "Not everyone has good taste\n";
+					exit;
 				}
 			}
-			else
-			{
-				print "Not everyone has good taste\n";
-				exit;
-			}
+			print "Please enter y/n\n";
 		}
 	}
 }
