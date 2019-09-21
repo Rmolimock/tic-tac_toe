@@ -127,10 +127,10 @@ sub game
 			$turns +=  1;
 		}
 		print "\n################################\n\nWould you like to play again (1 if yes)/(0 if no)\n";
-		while($again==0)
+		while(1)
 		{
 			$again=<STDIN>;
-			if ($again =~ /\b(0|1)\b/)
+			if ($again =~ /\b([0|1])\b/)
 			{
 				$again = int($again);
 				if($again == 1)
@@ -147,7 +147,7 @@ sub game
 					exit;
 				}
 			}
-			print "Please enter y/n\n";
+			print "Please enter 1/0\n";
 		}
 	}
 }
